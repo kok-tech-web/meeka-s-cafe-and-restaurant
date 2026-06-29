@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reviews — MEEKA's Café and Restaurant</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <div class="logo-circle">M</div>
+      <div class="logo-text">
+        <span class="logo-name">MEEKA's</span>
+        <span class="logo-sub">CAFÉ AND RESTAURANT</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="reservation.html">Reserve</a>
+      <a href="reviews.html" class="active">Reviews</a>
+      <a href="tour.html">Tour</a>
+      <a href="contact.html">Contact</a>
+      <a href="reservation.html" class="btn-reserve">Book a table</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <span class="hero-tag">REVIEWS</span>
+    <h1 class="hero-title">What our guests say</h1>
+    <p class="hero-sub">Real experiences from real customers — we love hearing from you.</p>
+  </div>
+
+  <!-- RATING SUMMARY -->
+  <section class="section" style="max-width: 800px; margin: 0 auto;">
+    <div class="rating-summary">
+      <div class="rating-big">
+        <div class="rating-number">4.8</div>
+        <div class="rating-stars">★★★★★</div>
+        <div class="rating-count">Based on 124 reviews</div>
+      </div>
+      <div class="rating-bars">
+        <div class="rating-bar-row">
+          <span class="bar-label">5 stars</span>
+          <div class="bar-track"><div class="bar-fill" style="width:85%;"></div></div>
+          <span class="bar-count">106</span>
+        </div>
+        <div class="rating-bar-row">
+          <span class="bar-label">4 stars</span>
+          <div class="bar-track"><div class="bar-fill" style="width:10%;"></div></div>
+          <span class="bar-count">12</span>
+        </div>
+        <div class="rating-bar-row">
+          <span class="bar-label">3 stars</span>
+          <div class="bar-track"><div class="bar-fill" style="width:4%;"></div></div>
+          <span class="bar-count">5</span>
+        </div>
+        <div class="rating-bar-row">
+          <span class="bar-label">2 stars</span>
+          <div class="bar-track"><div class="bar-fill" style="width:1%;"></div></div>
+          <span class="bar-count">1</span>
+        </div>
+        <div class="rating-bar-row">
+          <span class="bar-label">1 star</span>
+          <div class="bar-track"><div class="bar-fill" style="width:0%;"></div></div>
+          <span class="bar-count">0</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- LEAVE A REVIEW -->
+  <section class="section" style="max-width: 800px; margin: 0 auto;">
+    <div class="section-header">
+      <div class="section-tag"></div>
+      <h2 class="section-title">Leave a review</h2>
+    </div>
+    <div class="form-card">
+      <div class="form-group">
+        <label class="form-label">Your name</label>
+        <input type="text" class="form-input" placeholder="e.g. Sara Mulugeta" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Your rating</label>
+        <div class="star-picker" id="starPicker">
+          <span class="star" data-value="1">★</span>
+          <span class="star" data-value="2">★</span>
+          <span class="star" data-value="3">★</span>
+          <span class="star" data-value="4">★</span>
+          <span class="star" data-value="5">★</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Your review</label>
+        <textarea class="form-input form-textarea" placeholder="Tell us about your experience..."></textarea>
+      </div>
+      <button class="btn-primary" style="width:100%; justify-content:center; font-size:14px; padding:13px;">
+        <i class="ti ti-send"></i> Submit review
+      </button>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EXISTING REVIEWS -->
+  <section class="section" style="max-width: 800px; margin: 0 auto;">
+    <div class="section-header">
+      <div class="section-tag"></div>
+      <h2 class="section-title">Recent reviews</h2>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar">AT</div>
+        <div>
+          <div class="review-name">Abebe Tesfaye</div>
+          <div class="review-date">June 20, 2026</div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+      </div>
+      <div class="review-text">Amazing food, the injera was perfect and the staff was so welcoming. The Meeka's combo is something else — I've never tasted anything like it anywhere in Adama. Will definitely be back!</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar">SM</div>
+        <div>
+          <div class="review-name">Sara Mulugeta</div>
+          <div class="review-date">June 15, 2026</div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+      </div>
+      <div class="review-text">Great ambiance and fresh ingredients. The coffee ceremony was a wonderful touch. Came here for a family lunch and everyone loved it. The tibs special is a must try.</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar">BG</div>
+        <div>
+          <div class="review-name">Biruk Girma</div>
+          <div class="review-date">June 10, 2026</div>
+        </div>
+        <div class="review-stars">★★★★☆</div>
+      </div>
+      <div class="review-text">Really good food and cozy place. Slightly long wait time on a busy evening but the food was worth it. The shiro wat was perfectly spiced.</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar">HK</div>
+        <div>
+          <div class="review-name">Hana Kebede</div>
+          <div class="review-date">June 5, 2026</div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+      </div>
+      <div class="review-text">Best restaurant in Adama hands down. The family combo fed four of us perfectly and was incredible value. The atmosphere is warm and the service is always friendly.</div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-left">© 2026 MEEKA's Café and Restaurant. All rights reserved.</div>
+    <div class="footer-right">
+      <span><i class="ti ti-phone"></i> +251 9XX XXX XXX</span>
+      <span><i class="ti ti-map-pin"></i> Adama, Ethiopia</span>
+      <span><i class="ti ti-clock"></i> 7am – 10pm</span>
+    </div>
+  </footer>
+
+  <script>
+    const stars = document.querySelectorAll('.star');
+    let selected = 0;
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        selected = star.dataset.value;
+        stars.forEach(s => {
+          s.classList.toggle('active', s.dataset.value <= selected);
+        });
+      });
+      star.addEventListener('mouseover', () => {
+        stars.forEach(s => {
+          s.classList.toggle('active', s.dataset.value <= star.dataset.value);
+        });
+      });
+      star.addEventListener('mouseout', () => {
+        stars.forEach(s => {
+          s.classList.toggle('active', s.dataset.value <= selected);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

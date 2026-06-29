@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reserve — MEEKA's Café and Restaurant</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <div class="logo-circle">M</div>
+      <div class="logo-text">
+        <span class="logo-name">MEEKA's</span>
+        <span class="logo-sub">CAFÉ AND RESTAURANT</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="reservation.html" class="active">Reserve</a>
+      <a href="reviews.html">Reviews</a>
+      <a href="tour.html">Tour</a>
+      <a href="contact.html">Contact</a>
+      <a href="reservation.html" class="btn-reserve">Book a table</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <span class="hero-tag">RESERVATIONS</span>
+    <h1 class="hero-title">Book your table</h1>
+    <p class="hero-sub">Reserve your spot and we'll have everything ready for you.</p>
+  </div>
+
+  <!-- RESERVATION FORM -->
+  <section class="section" style="max-width: 620px; margin: 0 auto;">
+    <div class="form-card">
+
+      <div class="form-group">
+        <label class="form-label">Full name</label>
+        <input type="text" class="form-input" placeholder="e.g. Abebe Kebede" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Phone number</label>
+        <input type="tel" class="form-input" placeholder="e.g. +251 91 234 5678" />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Date</label>
+          <input type="date" class="form-input" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Time</label>
+          <input type="time" class="form-input" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Number of people</label>
+        <select class="form-input">
+          <option value="">Select...</option>
+          <option>1 person</option>
+          <option>2 people</option>
+          <option>3 people</option>
+          <option>4 people</option>
+          <option>5 people</option>
+          <option>6+ people</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Special requests <span style="color:#888; font-weight:400;">(optional)</span></label>
+        <textarea class="form-input form-textarea" placeholder="Any dietary needs, celebrations, seating preferences..."></textarea>
+      </div>
+
+      <button class="btn-primary" style="width:100%; justify-content:center; font-size:14px; padding:13px;">
+        <i class="ti ti-calendar"></i> Confirm reservation
+      </button>
+
+    </div>
+
+    <!-- INFO CARDS -->
+    <div class="info-grid">
+      <div class="info-card">
+        <i class="ti ti-clock"></i>
+        <div>
+          <div class="info-title">Opening hours</div>
+          <div class="info-desc">Mon – Sun, 7am to 10pm</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <i class="ti ti-phone"></i>
+        <div>
+          <div class="info-title">Call us directly</div>
+          <div class="info-desc">+251 9XX XXX XXX</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <i class="ti ti-info-circle"></i>
+        <div>
+          <div class="info-title">Walk-ins welcome</div>
+          <div class="info-desc">Subject to availability</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-left">© 2026 MEEKA's Café and Restaurant. All rights reserved.</div>
+    <div class="footer-right">
+      <span><i class="ti ti-phone"></i> +251 9XX XXX XXX</span>
+      <span><i class="ti ti-map-pin"></i> Adama, Ethiopia</span>
+      <span><i class="ti ti-clock"></i> 7am – 10pm</span>
+    </div>
+  </footer>
+
+</body>
+</html>
