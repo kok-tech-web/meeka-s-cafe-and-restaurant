@@ -123,4 +123,32 @@
   </footer>
 
 </body>
+<script>
+  const form = document.querySelector('.form-card');
+  const btn = form.querySelector('button');
+
+  btn.addEventListener('click', async () => {
+    const name = form.querySelectorAll('.form-input')[0].value;
+    const phone = form.querySelectorAll('.form-input')[1].value;
+    const date = form.querySelectorAll('.form-input')[2].value;
+    const time = form.querySelectorAll('.form-input')[3].value;
+    const people = form.querySelectorAll('.form-input')[4].value;
+    const requests = form.querySelectorAll('.form-input')[5].value;
+
+    // Send the data to our backend
+    const response = await fetch('http://localhost:3000/reservation', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, date, time, people, requests })
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      alert('Your reservation has been confirmed! We look forward to seeing you.');
+    } else {
+      alert('Something went wrong. Please try again.');
+    }
+  });
+</script>
 </html>
