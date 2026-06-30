@@ -86,7 +86,7 @@ meeka-s-cafe-and-restaurant/
 | Layer | Technology |
 |-------|------------|
 | Frontend | HTML, CSS, JavaScript |
-| Backend | Node.js + Express *(coming)* |
+| Backend | Node.js + Express  |
 | Database | MySQL *(coming)* |
 | Icons | Tabler Icons |
 | Version control | Git + GitHub |
@@ -125,7 +125,7 @@ This project uses a **fork and pull request** workflow.
 
 ## 📍 About the restaurant
 
-**MEEKA's Café and Restaurant** is located in Adama, Ethiopia. Known for its warm atmosphere, fresh daily ingredients, and signature combo platters unique to MEEKA's — not found anywhere else.
+**MEEKA's Café and Restaurant** is located in Addiss Ababa, Ethiopia. Known for its warm atmosphere, fresh daily ingredients, and signature combo platters unique to MEEKA's — not found anywhere else.
 
 ---
 
