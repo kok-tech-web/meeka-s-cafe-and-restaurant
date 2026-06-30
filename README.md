@@ -11,8 +11,8 @@ A full-stack website for **MEEKA's Café and Restaurant** — built to bring the
 | Phase 1 | Planning — pages, features, database design | ✅ Done |
 | Phase 2 | Design — wireframes, color system, mockups | ✅ Done |
 | Phase 3 | Frontend — all customer pages | ✅ Done |
-| Phase 4 | Backend — server, API, database connection | 🔄 In progress |
-| Phase 5 | Database — MySQL tables and queries | ⏳ Upcoming |
+| Phase 4 | Backend — server, API, database connection |✅ Done |
+| Phase 5 | Database — MySQL tables and queries | ✅ Done |
 | Phase 6 | Staff system — internal dashboard | ⏳ Upcoming |
 | Phase 7 | Testing and deployment | ⏳ Upcoming |
 
