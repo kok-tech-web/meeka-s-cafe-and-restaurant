@@ -179,6 +179,7 @@
   <script>
     const stars = document.querySelectorAll('.star');
     let selected = 0;
+
     stars.forEach(star => {
       star.addEventListener('click', () => {
         selected = star.dataset.value;
@@ -196,6 +197,38 @@
           s.classList.toggle('active', s.dataset.value <= selected);
         });
       });
+    });
+
+    // SUBMIT REVIEW
+    const reviewForm = document.querySelectorAll('.form-card')[0];
+    const reviewBtn = reviewForm.querySelector('button');
+
+    reviewBtn.addEventListener('click', async () => {
+      const name = reviewForm.querySelector('.form-input').value;
+      const review = reviewForm.querySelector('.form-textarea').value;
+
+      if (selected === 0) {
+        alert('Please select a star rating before submitting.');
+        return;
+      }
+
+      const response = await fetch('http://localhost:3000/review', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, rating: selected, review })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert('Thank you for your review!');
+        reviewForm.querySelector('.form-input').value = '';
+        reviewForm.querySelector('.form-textarea').value = '';
+        stars.forEach(s => s.classList.remove('active'));
+        selected = 0;
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
     });
   </script>
 
