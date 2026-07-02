@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reviews — MEEKA's Café and Restaurant</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
 </head>
+
 <body>
 
   <!-- NAVBAR -->
@@ -47,27 +49,37 @@
       <div class="rating-bars">
         <div class="rating-bar-row">
           <span class="bar-label">5 stars</span>
-          <div class="bar-track"><div class="bar-fill" style="width:85%;"></div></div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:85%;"></div>
+          </div>
           <span class="bar-count">106</span>
         </div>
         <div class="rating-bar-row">
           <span class="bar-label">4 stars</span>
-          <div class="bar-track"><div class="bar-fill" style="width:10%;"></div></div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:10%;"></div>
+          </div>
           <span class="bar-count">12</span>
         </div>
         <div class="rating-bar-row">
           <span class="bar-label">3 stars</span>
-          <div class="bar-track"><div class="bar-fill" style="width:4%;"></div></div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:4%;"></div>
+          </div>
           <span class="bar-count">5</span>
         </div>
         <div class="rating-bar-row">
           <span class="bar-label">2 stars</span>
-          <div class="bar-track"><div class="bar-fill" style="width:1%;"></div></div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:1%;"></div>
+          </div>
           <span class="bar-count">1</span>
         </div>
         <div class="rating-bar-row">
           <span class="bar-label">1 star</span>
-          <div class="bar-track"><div class="bar-fill" style="width:0%;"></div></div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:0%;"></div>
+          </div>
           <span class="bar-count">0</span>
         </div>
       </div>
@@ -125,7 +137,8 @@
         </div>
         <div class="review-stars">★★★★★</div>
       </div>
-      <div class="review-text">Amazing food, the injera was perfect and the staff was so welcoming. The Meeka's combo is something else — I've never tasted anything like it anywhere in Adama. Will definitely be back!</div>
+      <div class="review-text">Amazing food, the injera was perfect and the staff was so welcoming. The Meeka's combo is
+        something else — I've never tasted anything like it anywhere in Adama. Will definitely be back!</div>
     </div>
 
     <div class="review-card">
@@ -137,7 +150,8 @@
         </div>
         <div class="review-stars">★★★★★</div>
       </div>
-      <div class="review-text">Great ambiance and fresh ingredients. The coffee ceremony was a wonderful touch. Came here for a family lunch and everyone loved it. The tibs special is a must try.</div>
+      <div class="review-text">Great ambiance and fresh ingredients. The coffee ceremony was a wonderful touch. Came
+        here for a family lunch and everyone loved it. The tibs special is a must try.</div>
     </div>
 
     <div class="review-card">
@@ -149,7 +163,8 @@
         </div>
         <div class="review-stars">★★★★☆</div>
       </div>
-      <div class="review-text">Really good food and cozy place. Slightly long wait time on a busy evening but the food was worth it. The shiro wat was perfectly spiced.</div>
+      <div class="review-text">Really good food and cozy place. Slightly long wait time on a busy evening but the food
+        was worth it. The shiro wat was perfectly spiced.</div>
     </div>
 
     <div class="review-card">
@@ -161,7 +176,8 @@
         </div>
         <div class="review-stars">★★★★★</div>
       </div>
-      <div class="review-text">Best restaurant in Adama hands down. The family combo fed four of us perfectly and was incredible value. The atmosphere is warm and the service is always friendly.</div>
+      <div class="review-text">Best restaurant in Adama hands down. The family combo fed four of us perfectly and was
+        incredible value. The atmosphere is warm and the service is always friendly.</div>
     </div>
 
   </section>
@@ -177,6 +193,7 @@
   </footer>
 
   <script>
+    const API_URL = "http://localhost:3000"; // change this one line when you deploy
     const stars = document.querySelectorAll('.star');
     let selected = 0;
 
@@ -212,7 +229,7 @@
         return;
       }
 
-      const response = await fetch('http://localhost:3000/review', {
+      const response = await fetch(`${API_URL}/review`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, rating: selected, review })
@@ -233,4 +250,5 @@
   </script>
 
 </body>
+
 </html>

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Join Us — MEEKA's Café and Restaurant</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
 </head>
+
 <body>
 
   <!-- NAVBAR -->
@@ -112,7 +114,8 @@
       </div>
       <div class="form-group">
         <label class="form-label">Why should we hire you?</label>
-        <textarea class="form-input form-textarea" placeholder="Tell us a little about yourself and why you'd be a great fit..."></textarea>
+        <textarea class="form-input form-textarea"
+          placeholder="Tell us a little about yourself and why you'd be a great fit..."></textarea>
       </div>
       <button class="btn-primary" style="width:100%; justify-content:center; font-size:14px; padding:13px;">
         <i class="ti ti-send"></i> Submit application
@@ -131,6 +134,7 @@
   </footer>
 
   <script>
+    const API_URL = "http://localhost:3000"; // change this one line when you deploy
     const form = document.querySelector('.form-card');
     const btn = form.querySelector('button');
 
@@ -142,7 +146,7 @@
       const position = inputs[3].value;
       const message = form.querySelector('.form-textarea').value;
 
-      const response = await fetch('http://localhost:3000/apply', {
+      const response = await fetch(`${API_URL}/apply`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, phone, position, message })
@@ -159,4 +163,5 @@
   </script>
 
 </body>
+
 </html>

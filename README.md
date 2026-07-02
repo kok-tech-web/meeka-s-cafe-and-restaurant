@@ -57,13 +57,13 @@ meeka-s-cafe-and-restaurant/
 ├── jobs.html
 ├── contact.html
 │
-├── css/
+├── CSS/
 │   └── style.css
 │
-├── js/
-│   └── main.js
-│
-└── image/
+├── server.js
+├── schema.sql
+├── .env.example
+└── package.json
 ```
 
 ---
@@ -87,7 +87,7 @@ meeka-s-cafe-and-restaurant/
 |-------|------------|
 | Frontend | HTML, CSS, JavaScript |
 | Backend | Node.js + Express  |
-| Database | MySQL *(coming)* |
+| Database | MySQL |
 | Icons | Tabler Icons |
 | Version control | Git + GitHub |
 
