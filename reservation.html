@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reserve — MEEKA's Café and Restaurant</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
 </head>
+
 <body>
 
   <!-- NAVBAR -->
@@ -76,7 +78,8 @@
 
       <div class="form-group">
         <label class="form-label">Special requests <span style="color:#888; font-weight:400;">(optional)</span></label>
-        <textarea class="form-input form-textarea" placeholder="Any dietary needs, celebrations, seating preferences..."></textarea>
+        <textarea class="form-input form-textarea"
+          placeholder="Any dietary needs, celebrations, seating preferences..."></textarea>
       </div>
 
       <button class="btn-primary" style="width:100%; justify-content:center; font-size:14px; padding:13px;">
@@ -123,6 +126,7 @@
   </footer>
 
   <script>
+    const API_URL = "http://localhost:3000"; // change this one line when you deploy
     const form = document.querySelector('.form-card');
     const btn = form.querySelector('button');
 
@@ -131,10 +135,10 @@
       const phone = form.querySelectorAll('.form-input')[1].value;
       const date = form.querySelectorAll('.form-input')[2].value;
       const time = form.querySelectorAll('.form-input')[3].value;
-      const people = form.querySelectorAll('.form-input')[4].value;
+      const people = parseInt(form.querySelectorAll('.form-input')[4].value);
       const requests = form.querySelectorAll('.form-input')[5].value;
 
-      const response = await fetch('http://localhost:3000/reservation', {
+      const response = await fetch(`${API_URL}/reservation`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, phone, date, time, people, requests })
@@ -151,4 +155,5 @@
   </script>
 
 </body>
+
 </html>
