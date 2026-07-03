@@ -136,6 +136,27 @@ app.get('/applications', (req, res) => {
     });
 });
 
+// STAFF LOGIN ROUTE
+app.post('/staff/login', (req, res) => {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        return res.status(400).json({ success: false, message: 'Please fill in all fields.' });
+    }
+
+    const sql = 'SELECT * FROM managers WHERE email = ? AND password = ?';
+    db.query(sql, [email, password], (err, results) => {
+        if (err) {
+            console.error('Login error:', err.message);
+            return res.status(500).json({ success: false, message: 'Server error.' });
+        }
+        if (results.length === 0) {
+            return res.status(401).json({ success: false, message: 'Invalid email or password.' });
+        }
+        res.json({ success: true, name: results[0].name });
+    });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

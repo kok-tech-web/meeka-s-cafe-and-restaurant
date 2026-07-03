@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Staff Login — MEEKA's</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    .login-page {
+      min-height: 100vh;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-card {
+      background: #242424;
+      border: 1px solid #333;
+      border-radius: 16px;
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+    }
+    .login-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+    .login-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+    .login-sub {
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .login-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #ccc;
+      margin-bottom: 6px;
+    }
+    .login-input {
+      width: 100%;
+      padding: 10px 14px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #fff;
+      outline: none;
+      margin-bottom: 16px;
+      font-family: 'Segoe UI', sans-serif;
+      transition: border-color 0.2s;
+    }
+    .login-input:focus {
+      border-color: #E87722;
+    }
+    .login-btn {
+      width: 100%;
+      background: #E87722;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .login-btn:hover {
+      background: #cf6510;
+    }
+    .login-error {
+      background: #3a1a1a;
+      border: 1px solid #cc3333;
+      color: #ff6666;
+      font-size: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-page">
+    <div class="login-card">
+
+      <div class="login-logo">
+        <div class="logo-circle">M</div>
+        <div class="logo-text">
+          <span class="logo-name">MEEKA's</span>
+          <span class="logo-sub">CAFÉ AND RESTAURANT</span>
+        </div>
+      </div>
+
+      <div class="login-title">Staff portal</div>
+      <div class="login-sub">Sign in to your manager account</div>
+
+      <div class="login-error" id="errorMsg">
+        <i class="ti ti-alert-circle"></i> Invalid email or password.
+      </div>
+
+      <label class="login-label">Email address</label>
+      <input type="email" class="login-input" id="email" placeholder="manager@meekas.et" />
+
+      <label class="login-label">Password</label>
+      <input type="password" class="login-input" id="password" placeholder="••••••••" />
+
+      <button class="login-btn" onclick="handleLogin()">
+        <i class="ti ti-login"></i> Sign in
+      </button>
+
+    </div>
+  </div>
+
+  <script>
+    // If already logged in, go straight to dashboard
+    if (localStorage.getItem('meeka_staff_logged_in') === 'true') {
+      window.location.href = 'dashboard.html';
+    }
+
+    async function handleLogin() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorMsg = document.getElementById('errorMsg');
+
+      errorMsg.style.display = 'none';
+
+      const response = await fetch('http://localhost:3000/staff/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        localStorage.setItem('meeka_staff_logged_in', 'true');
+        localStorage.setItem('meeka_staff_name', result.name);
+        window.location.href = 'dashboard.html';
+      } else {
+        errorMsg.style.display = 'block';
+      }
+    }
+  </script>
+
+</body>
+</html>
