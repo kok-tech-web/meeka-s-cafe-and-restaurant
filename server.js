@@ -157,6 +157,108 @@ app.post('/staff/login', (req, res) => {
     });
 });
 
+// GET all employees
+app.get('/employees', (req, res) => {
+    db.query('SELECT id, name, email, role, shift, status, created_at FROM employees ORDER BY name', (err, results) => {
+        if (err) {
+            console.error('Error fetching employees:', err.message);
+            return res.status(500).json({ success: false, message: 'Failed to fetch employees' });
+        }
+        res.json({ success: true, data: results });
+    });
+});
+
+// ADD new employee
+app.post('/employees', (req, res) => {
+    const { name, email, password, role, shift } = req.body;
+    if (!name || !email || !password || !role || !shift) {
+        return res.status(400).json({ success: false, message: 'Please fill in all fields.' });
+    }
+    const sql = 'INSERT INTO employees (name, email, password, role, shift) VALUES (?, ?, ?, ?, ?)';
+    db.query(sql, [name, email, password, role, shift], (err, result) => {
+        if (err) {
+            console.error('Error adding employee:', err.message);
+            return res.status(500).json({ success: false, message: 'Failed to add employee.' });
+        }
+        res.json({ success: true, message: 'Employee added!' });
+    });
+});
+
+// ATTENDANCE ROUTES
+app.post('/attendance/clockin', (req, res) => {
+    const { employee_id } = req.body;
+    const today = new Date().toISOString().split('T')[0];
+    const sql = `INSERT INTO attendance (employee_id, clock_in, date) VALUES (?, NOW(), ?)
+                 ON DUPLICATE KEY UPDATE clock_in = NOW()`;
+    db.query(sql, [employee_id, today], (err) => {
+        if (err) return res.status(500).json({ success: false, message: 'Failed to clock in.' });
+        res.json({ success: true, message: 'Clocked in successfully!' });
+    });
+});
+
+app.post('/attendance/clockout', (req, res) => {
+    const { employee_id } = req.body;
+    const today = new Date().toISOString().split('T')[0];
+    const sql = `UPDATE attendance SET clock_out = NOW() WHERE employee_id = ? AND date = ?`;
+    db.query(sql, [employee_id, today], (err) => {
+        if (err) return res.status(500).json({ success: false, message: 'Failed to clock out.' });
+        res.json({ success: true, message: 'Clocked out successfully!' });
+    });
+});
+
+app.get('/attendance/today', (req, res) => {
+    const today = new Date().toISOString().split('T')[0];
+    const sql = `SELECT a.*, e.name as employee_name 
+                 FROM attendance a 
+                 JOIN employees e ON a.employee_id = e.id 
+                 WHERE a.date = ?`;
+    db.query(sql, [today], (err, results) => {
+        if (err) return res.status(500).json({ success: false, message: 'Failed to fetch attendance.' });
+        res.json({ success: true, data: results });
+    });
+});
+
+// TASKS ROUTES
+app.get('/tasks', (req, res) => {
+    const sql = `SELECT t.*, e.name as employee_name 
+                 FROM tasks t 
+                 JOIN employees e ON t.assigned_to = e.id 
+                 ORDER BY t.created_at DESC`;
+    db.query(sql, (err, results) => {
+        if (err) return res.status(500).json({ success: false, message: 'Failed to fetch tasks.' });
+        res.json({ success: true, data: results });
+    });
+});
+
+app.post('/tasks', (req, res) => {
+    const { title, assigned_to, due_date } = req.body;
+    if (!title || !assigned_to) return res.status(400).json({ success: false, message: 'Please fill in all fields.' });
+    db.query('INSERT INTO tasks (title, assigned_to, due_date) VALUES (?, ?, ?)',
+        [title, assigned_to, due_date || null], (err) => {
+        if (err) return res.status(500).json({ success: false, message: 'Failed to assign task.' });
+        res.json({ success: true, message: 'Task assigned!' });
+    });
+});
+
+app.put('/tasks/:id', (req, res) => {
+    const { status } = req.body;
+    db.query('UPDATE tasks SET status = ? WHERE id = ?', [status, req.params.id], (err) => {
+        if (err) return res.status(500).json({ success: false, message: 'Failed to update task.' });
+        res.json({ success: true, message: 'Task updated!' });
+    });
+});
+
+// UPDATE APPLICATION STATUS
+app.put('/applications/:id', (req, res) => {
+    const { status } = req.body;
+    db.query('UPDATE applications SET status = ? WHERE id = ?', [status, req.params.id], (err) => {
+        if (err) return res.status(500).json({ success: false, message: 'Failed to update application.' });
+        res.json({ success: true, message: 'Application updated!' });
+    });
+});
+
+
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

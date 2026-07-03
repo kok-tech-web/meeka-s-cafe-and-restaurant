@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Attendance — MEEKA's Staff</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; }
+    .staff-layout { display: flex; min-height: 100vh; }
+    .sidebar { width: 220px; background: #1a1a1a; display: flex; flex-direction: column; padding: 20px 0; position: fixed; top: 0; left: 0; height: 100vh; }
+    .sidebar-brand { display: flex; align-items: center; gap: 10px; padding: 0 20px 20px; border-bottom: 1px solid #2a2a2a; margin-bottom: 16px; }
+    .sidebar-brand .logo-circle { width: 32px; height: 32px; font-size: 15px; background: #E87722; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; }
+    .sidebar-brand .logo-name { font-size: 13px; font-weight: 600; color: #fff; }
+    .sidebar-brand .logo-sub { font-size: 9px; color: #E87722; letter-spacing: 0.08em; }
+    .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 20px; font-size: 13px; color: #888; text-decoration: none; transition: all 0.2s; }
+    .nav-item:hover { background: #242424; color: #fff; }
+    .nav-item.active { background: #242424; color: #E87722; border-left: 3px solid #E87722; }
+    .nav-item i { font-size: 18px; }
+    .sidebar-footer { margin-top: auto; padding: 16px 20px; border-top: 1px solid #2a2a2a; }
+    .logout-btn { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #888; cursor: pointer; background: none; border: none; font-family: 'Segoe UI', sans-serif; }
+    .logout-btn:hover { color: #ff6666; }
+    .main-content { margin-left: 220px; flex: 1; padding: 28px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .topbar-title { font-size: 20px; font-weight: 600; color: #1a1a1a; }
+    .topbar-user { font-size: 13px; color: #888; display: flex; align-items: center; gap: 8px; }
+    .topbar-avatar { width: 32px; height: 32px; border-radius: 50%; background: #fff3e6; color: #E87722; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+    .dash-section { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    .dash-section-title { font-size: 15px; font-weight: 600; color: #1a1a1a; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .dash-section-title i { color: #E87722; }
+    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table th { font-size: 11px; font-weight: 600; color: #888; text-transform: uppercase; padding: 8px 12px; border-bottom: 1px solid #eee; text-align: left; }
+    .data-table td { font-size: 13px; color: #1a1a1a; padding: 10px 12px; border-bottom: 1px solid #f5f5f5; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 500; }
+    .badge-in { background: #e6f4ea; color: #2d7a3a; }
+    .badge-out { background: #fce8e8; color: #cc3333; }
+    .badge-absent { background: #f5f5f5; color: #888; }
+    .empty-state { text-align: center; padding: 32px; color: #aaa; font-size: 13px; }
+    .btn-primary { background: #E87722; color: #fff; border: none; padding: 9px 18px; border-radius: 8px; font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-family: 'Segoe UI', sans-serif; }
+    .btn-primary:hover { background: #cf6510; }
+    .btn-danger { background: #fce8e8; color: #cc3333; border: none; padding: 9px 18px; border-radius: 8px; font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-family: 'Segoe UI', sans-serif; }
+    .clock-card { background: #1a1a1a; border-radius: 12px; padding: 24px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .clock-info .clock-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+    .clock-info .clock-sub { font-size: 13px; color: #888; }
+    .clock-btns { display: flex; gap: 10px; }
+    .form-input { padding: 9px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 13px; color: #1a1a1a; outline: none; font-family: 'Segoe UI', sans-serif; }
+    .form-input:focus { border-color: #E87722; }
+  </style>
+</head>
+<body>
+
+<div class="staff-layout">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-circle">M</div>
+      <div>
+        <div class="logo-name">MEEKA's</div>
+        <div class="logo-sub">STAFF PANEL</div>
+      </div>
+    </div>
+    <a href="dashboard.html" class="nav-item"><i class="ti ti-layout-dashboard"></i> Dashboard</a>
+    <a href="employees.html" class="nav-item"><i class="ti ti-users"></i> Employees</a>
+    <a href="attendance.html" class="nav-item active"><i class="ti ti-clock"></i> Attendance</a>
+    <a href="tasks.html" class="nav-item"><i class="ti ti-checklist"></i> Tasks</a>
+    <a href="applications.html" class="nav-item"><i class="ti ti-mail"></i> Applications</a>
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="logout()"><i class="ti ti-logout"></i> Sign out</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <div class="topbar-title">Attendance</div>
+      <div class="topbar-user">
+        <div class="topbar-avatar" id="avatarInitial">M</div>
+        <span id="managerName">Manager</span>
+      </div>
+    </div>
+
+    <!-- CLOCK IN/OUT CARD -->
+    <div class="clock-card">
+      <div class="clock-info">
+        <div class="clock-title">Employee clock in / out</div>
+        <div class="clock-sub">Select an employee and record their attendance</div>
+      </div>
+      <div class="clock-btns">
+        <select class="form-input" id="empSelect">
+          <option value="">Select employee...</option>
+        </select>
+        <button class="btn-primary" onclick="clockIn()">
+          <i class="ti ti-login"></i> Clock in
+        </button>
+        <button class="btn-danger" onclick="clockOut()">
+          <i class="ti ti-logout"></i> Clock out
+        </button>
+      </div>
+    </div>
+
+    <!-- TODAY'S ATTENDANCE -->
+    <div class="dash-section">
+      <div class="dash-section-title">
+        <i class="ti ti-clock"></i> Today's attendance
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Employee</th>
+            <th>Clock in</th>
+            <th>Clock out</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="attendanceTable">
+          <tr><td colspan="4" class="empty-state">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<script>
+  if (localStorage.getItem('meeka_staff_logged_in') !== 'true') window.location.href = 'login.html';
+  const name = localStorage.getItem('meeka_staff_name') || 'Manager';
+  document.getElementById('managerName').textContent = name;
+  document.getElementById('avatarInitial').textContent = name.charAt(0).toUpperCase();
+  function logout() { localStorage.clear(); window.location.href = 'login.html'; }
+
+  async function loadEmployees() {
+    const res = await fetch('http://localhost:3000/employees');
+    const data = await res.json();
+    if (!data.success) return;
+    const select = document.getElementById('empSelect');
+    data.data.forEach(e => {
+      const opt = document.createElement('option');
+      opt.value = e.id;
+      opt.textContent = e.name;
+      select.appendChild(opt);
+    });
+  }
+
+  async function loadAttendance() {
+    const res = await fetch('http://localhost:3000/attendance/today');
+    const data = await res.json();
+    const tbody = document.getElementById('attendanceTable');
+    if (!data.success || data.data.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="4" class="empty-state">No attendance records for today</td></tr>';
+      return;
+    }
+    tbody.innerHTML = data.data.map(a => `
+      <tr>
+        <td>${a.employee_name}</td>
+        <td>${a.clock_in ? new Date(a.clock_in).toLocaleTimeString() : '—'}</td>
+        <td>${a.clock_out ? new Date(a.clock_out).toLocaleTimeString() : '—'}</td>
+        <td><span class="badge ${a.clock_out ? 'badge-out' : a.clock_in ? 'badge-in' : 'badge-absent'}">
+          ${a.clock_out ? 'Clocked out' : a.clock_in ? 'Clocked in' : 'Absent'}
+        </span></td>
+      </tr>
+    `).join('');
+  }
+
+  async function clockIn() {
+    const empId = document.getElementById('empSelect').value;
+    if (!empId) return alert('Please select an employee.');
+    const res = await fetch('http://localhost:3000/attendance/clockin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ employee_id: empId })
+    });
+    const data = await res.json();
+    alert(data.message);
+    loadAttendance();
+  }
+
+  async function clockOut() {
+    const empId = document.getElementById('empSelect').value;
+    if (!empId) return alert('Please select an employee.');
+    const res = await fetch('http://localhost:3000/attendance/clockout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ employee_id: empId })
+    });
+    const data = await res.json();
+    alert(data.message);
+    loadAttendance();
+  }
+
+  loadEmployees();
+  loadAttendance();
+</script>
+
+</body>
+</html>

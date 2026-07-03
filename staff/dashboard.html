@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — MEEKA's Staff</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; }
+
+    /* STAFF LAYOUT */
+    .staff-layout { display: flex; min-height: 100vh; }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 220px;
+      background: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 0;
+      position: fixed;
+      top: 0; left: 0;
+      height: 100vh;
+    }
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 20px 20px;
+      border-bottom: 1px solid #2a2a2a;
+      margin-bottom: 16px;
+    }
+    .sidebar-brand .logo-circle { width: 32px; height: 32px; font-size: 15px; background: #E87722; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; }
+    .sidebar-brand .logo-name { font-size: 13px; font-weight: 600; color: #fff; }
+    .sidebar-brand .logo-sub { font-size: 9px; color: #E87722; letter-spacing: 0.08em; }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      font-size: 13px;
+      color: #888;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .nav-item:hover { background: #242424; color: #fff; }
+    .nav-item.active { background: #242424; color: #E87722; border-left: 3px solid #E87722; }
+    .nav-item i { font-size: 18px; }
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 16px 20px;
+      border-top: 1px solid #2a2a2a;
+    }
+    .logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #888;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .logout-btn:hover { color: #ff6666; }
+
+    /* MAIN CONTENT */
+    .main-content {
+      margin-left: 220px;
+      flex: 1;
+      padding: 28px;
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .topbar-title { font-size: 20px; font-weight: 600; color: #1a1a1a; }
+    .topbar-user { font-size: 13px; color: #888; display: flex; align-items: center; gap: 8px; }
+    .topbar-avatar { width: 32px; height: 32px; border-radius: 50%; background: #fff3e6; color: #E87722; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+
+    /* STATS */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 28px; }
+    .stat-card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 20px; }
+    .stat-number { font-size: 32px; font-weight: 700; color: #1a1a1a; }
+    .stat-label { font-size: 13px; color: #888; margin-top: 4px; }
+    .stat-icon { font-size: 24px; color: #E87722; margin-bottom: 10px; }
+
+    /* SECTION */
+    .dash-section { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    .dash-section-title { font-size: 15px; font-weight: 600; color: #1a1a1a; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .dash-section-title i { color: #E87722; }
+
+    /* TABLE */
+    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table th { font-size: 11px; font-weight: 600; color: #888; text-transform: uppercase; padding: 8px 12px; border-bottom: 1px solid #eee; text-align: left; }
+    .data-table td { font-size: 13px; color: #1a1a1a; padding: 10px 12px; border-bottom: 1px solid #f5f5f5; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 500; }
+    .badge-pending { background: #fff3e6; color: #994400; }
+    .badge-confirmed { background: #e6f4ea; color: #2d7a3a; }
+    .empty-state { text-align: center; padding: 32px; color: #aaa; font-size: 13px; }
+  </style>
+</head>
+<body>
+
+<div class="staff-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-circle">M</div>
+      <div>
+        <div class="logo-name">MEEKA's</div>
+        <div class="logo-sub">STAFF PANEL</div>
+      </div>
+    </div>
+    <a href="dashboard.html" class="nav-item active"><i class="ti ti-layout-dashboard"></i> Dashboard</a>
+    <a href="employees.html" class="nav-item"><i class="ti ti-users"></i> Employees</a>
+    <a href="attendance.html" class="nav-item"><i class="ti ti-clock"></i> Attendance</a>
+    <a href="tasks.html" class="nav-item"><i class="ti ti-checklist"></i> Tasks</a>
+    <a href="applications.html" class="nav-item"><i class="ti ti-mail"></i> Applications</a>
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="logout()">
+        <i class="ti ti-logout"></i> Sign out
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <div class="topbar">
+      <div class="topbar-title">Dashboard</div>
+      <div class="topbar-user">
+        <div class="topbar-avatar" id="avatarInitial">M</div>
+        <span id="managerName">Manager</span>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon"><i class="ti ti-calendar"></i></div>
+        <div class="stat-number" id="totalReservations">—</div>
+        <div class="stat-label">Total reservations</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="ti ti-star"></i></div>
+        <div class="stat-number" id="totalReviews">—</div>
+        <div class="stat-label">Total reviews</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="ti ti-mail"></i></div>
+        <div class="stat-number" id="totalApplications">—</div>
+        <div class="stat-label">Job applications</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="ti ti-users"></i></div>
+        <div class="stat-number" id="totalEmployees">—</div>
+        <div class="stat-label">Employees</div>
+      </div>
+    </div>
+
+    <!-- RECENT RESERVATIONS -->
+    <div class="dash-section">
+      <div class="dash-section-title">
+        <i class="ti ti-calendar"></i> Recent reservations
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>People</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="reservationsTable">
+          <tr><td colspan="6" class="empty-state">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RECENT REVIEWS -->
+    <div class="dash-section">
+      <div class="dash-section-title">
+        <i class="ti ti-star"></i> Recent reviews
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>Review</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="reviewsTable">
+          <tr><td colspan="4" class="empty-state">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  // Check login
+  if (localStorage.getItem('meeka_staff_logged_in') !== 'true') {
+    window.location.href = 'login.html';
+  }
+
+  // Show manager name
+  const name = localStorage.getItem('meeka_staff_name') || 'Manager';
+  document.getElementById('managerName').textContent = name;
+  document.getElementById('avatarInitial').textContent = name.charAt(0).toUpperCase();
+
+  // Logout
+  function logout() {
+    localStorage.removeItem('meeka_staff_logged_in');
+    localStorage.removeItem('meeka_staff_name');
+    window.location.href = 'login.html';
+  }
+
+  // Load dashboard data
+  async function loadDashboard() {
+    try {
+      // Fetch reservations
+      const resRes = await fetch('http://localhost:3000/reservations');
+      const resData = await resRes.json();
+      if (resData.success) {
+        document.getElementById('totalReservations').textContent = resData.data.length;
+        const tbody = document.getElementById('reservationsTable');
+        if (resData.data.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No reservations yet</td></tr>';
+        } else {
+          tbody.innerHTML = resData.data.slice(0, 5).map(r => `
+            <tr>
+              <td>${r.name}</td>
+              <td>${r.phone}</td>
+              <td>${new Date(r.date).toLocaleDateString()}</td>
+              <td>${r.time}</td>
+              <td>${r.people}</td>
+              <td><span class="badge badge-confirmed">Confirmed</span></td>
+            </tr>
+          `).join('');
+        }
+      }
+
+      // Fetch reviews
+      const revRes = await fetch('http://localhost:3000/reviews');
+      const revData = await revRes.json();
+      if (revData.success) {
+        document.getElementById('totalReviews').textContent = revData.data.length;
+        const tbody = document.getElementById('reviewsTable');
+        if (revData.data.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="4" class="empty-state">No reviews yet</td></tr>';
+        } else {
+          tbody.innerHTML = revData.data.slice(0, 5).map(r => `
+            <tr>
+              <td>${r.name}</td>
+              <td>${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</td>
+              <td>${r.review}</td>
+              <td>${new Date(r.created_at).toLocaleDateString()}</td>
+            </tr>
+          `).join('');
+        }
+      }
+
+      // Fetch applications
+      const appRes = await fetch('http://localhost:3000/applications');
+      const appData = await appRes.json();
+      if (appData.success) {
+        document.getElementById('totalApplications').textContent = appData.data.length;
+      }
+
+      // Fetch employees
+      const empRes = await fetch('http://localhost:3000/employees');
+      const empData = await empRes.json();
+      if (empData.success) {
+        document.getElementById('totalEmployees').textContent = empData.data.length;
+      }
+
+    } catch (err) {
+      console.error('Error loading dashboard:', err);
+    }
+  }
+
+  loadDashboard();
+</script>
+
+</body>
+</html>

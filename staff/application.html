@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Applications — MEEKA's Staff</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; }
+    .staff-layout { display: flex; min-height: 100vh; }
+    .sidebar { width: 220px; background: #1a1a1a; display: flex; flex-direction: column; padding: 20px 0; position: fixed; top: 0; left: 0; height: 100vh; }
+    .sidebar-brand { display: flex; align-items: center; gap: 10px; padding: 0 20px 20px; border-bottom: 1px solid #2a2a2a; margin-bottom: 16px; }
+    .sidebar-brand .logo-circle { width: 32px; height: 32px; font-size: 15px; background: #E87722; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; }
+    .sidebar-brand .logo-name { font-size: 13px; font-weight: 600; color: #fff; }
+    .sidebar-brand .logo-sub { font-size: 9px; color: #E87722; letter-spacing: 0.08em; }
+    .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 20px; font-size: 13px; color: #888; text-decoration: none; transition: all 0.2s; }
+    .nav-item:hover { background: #242424; color: #fff; }
+    .nav-item.active { background: #242424; color: #E87722; border-left: 3px solid #E87722; }
+    .nav-item i { font-size: 18px; }
+    .sidebar-footer { margin-top: auto; padding: 16px 20px; border-top: 1px solid #2a2a2a; }
+    .logout-btn { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #888; cursor: pointer; background: none; border: none; font-family: 'Segoe UI', sans-serif; }
+    .logout-btn:hover { color: #ff6666; }
+    .main-content { margin-left: 220px; flex: 1; padding: 28px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .topbar-title { font-size: 20px; font-weight: 600; color: #1a1a1a; }
+    .topbar-user { font-size: 13px; color: #888; display: flex; align-items: center; gap: 8px; }
+    .topbar-avatar { width: 32px; height: 32px; border-radius: 50%; background: #fff3e6; color: #E87722; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+    .app-card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 20px; margin-bottom: 14px; }
+    .app-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .app-name { font-size: 15px; font-weight: 600; color: #1a1a1a; }
+    .app-position { font-size: 13px; color: #888; margin-bottom: 6px; }
+    .app-contact { font-size: 12px; color: #aaa; display: flex; gap: 16px; margin-bottom: 12px; }
+    .app-contact span { display: flex; align-items: center; gap: 4px; }
+    .app-message { font-size: 13px; color: #555; line-height: 1.6; background: #fafafa; border-radius: 8px; padding: 12px; margin-bottom: 14px; }
+    .app-btns { display: flex; gap: 8px; }
+    .badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 500; }
+    .badge-pending { background: #fff3e6; color: #994400; }
+    .badge-accepted { background: #e6f4ea; color: #2d7a3a; }
+    .badge-declined { background: #fce8e8; color: #cc3333; }
+    .btn-accept { background: #e6f4ea; color: #2d7a3a; border: none; padding: 7px 14px; border-radius: 8px; font-size: 12px; cursor: pointer; font-family: 'Segoe UI', sans-serif; display: inline-flex; align-items: center; gap: 5px; }
+    .btn-decline { background: #fce8e8; color: #cc3333; border: none; padding: 7px 14px; border-radius: 8px; font-size: 12px; cursor: pointer; font-family: 'Segoe UI', sans-serif; display: inline-flex; align-items: center; gap: 5px; }
+    .empty-state { text-align: center; padding: 48px; color: #aaa; font-size: 13px; background: #fff; border-radius: 12px; border: 1px solid #eee; }
+  </style>
+</head>
+<body>
+
+<div class="staff-layout">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-circle">M</div>
+      <div>
+        <div class="logo-name">MEEKA's</div>
+        <div class="logo-sub">STAFF PANEL</div>
+      </div>
+    </div>
+    <a href="dashboard.html" class="nav-item"><i class="ti ti-layout-dashboard"></i> Dashboard</a>
+    <a href="employees.html" class="nav-item"><i class="ti ti-users"></i> Employees</a>
+    <a href="attendance.html" class="nav-item"><i class="ti ti-clock"></i> Attendance</a>
+    <a href="tasks.html" class="nav-item"><i class="ti ti-checklist"></i> Tasks</a>
+    <a href="applications.html" class="nav-item active"><i class="ti ti-mail"></i> Applications</a>
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="logout()"><i class="ti ti-logout"></i> Sign out</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <div class="topbar-title">Job applications</div>
+      <div class="topbar-user">
+        <div class="topbar-avatar" id="avatarInitial">M</div>
+        <span id="managerName">Manager</span>
+      </div>
+    </div>
+
+    <div id="applicationsList">
+      <div class="empty-state">Loading...</div>
+    </div>
+  </main>
+</div>
+
+<script>
+  if (localStorage.getItem('meeka_staff_logged_in') !== 'true') window.location.href = 'login.html';
+  const name = localStorage.getItem('meeka_staff_name') || 'Manager';
+  document.getElementById('managerName').textContent = name;
+  document.getElementById('avatarInitial').textContent = name.charAt(0).toUpperCase();
+  function logout() { localStorage.clear(); window.location.href = 'login.html'; }
+
+  async function loadApplications() {
+    const res = await fetch('http://localhost:3000/applications');
+    const data = await res.json();
+    const container = document.getElementById('applicationsList');
+    if (!data.success || data.data.length === 0) {
+      container.innerHTML = '<div class="empty-state">No applications yet</div>';
+      return;
+    }
+    container.innerHTML = data.data.map(a => `
+      <div class="app-card" id="app-${a.id}">
+        <div class="app-header">
+          <div class="app-name">${a.name}</div>
+          <span class="badge badge-${a.status}">${a.status}</span>
+        </div>
+        <div class="app-position"><i class="ti ti-briefcase"></i> ${a.position}</div>
+        <div class="app-contact">
+          <span><i class="ti ti-mail"></i> ${a.email}</span>
+          <span><i class="ti ti-phone"></i> ${a.phone}</span>
+          <span><i class="ti ti-calendar"></i> ${new Date(a.created_at).toLocaleDateString()}</span>
+        </div>
+        ${a.message ? `<div class="app-message">${a.message}</div>` : ''}
+        ${a.status === 'pending' ? `
+        <div class="app-btns">
+          <button class="btn-accept" onclick="updateApplication(${a.id}, 'accepted')">
+            <i class="ti ti-check"></i> Accept
+          </button>
+          <button class="btn-decline" onclick="updateApplication(${a.id}, 'declined')">
+            <i class="ti ti-x"></i> Decline
+          </button>
+        </div>` : ''}
+      </div>
+    `).join('');
+  }
+
+  async function updateApplication(id, status) {
+    const res = await fetch(`http://localhost:3000/applications/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status })
+    });
+    const data = await res.json();
+    if (data.success) loadApplications();
+    else alert(data.message);
+  }
+
+  loadApplications();
+</script>
+
+</body>
+</html>
