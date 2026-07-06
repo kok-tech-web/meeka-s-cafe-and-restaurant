@@ -2,11 +2,18 @@ const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2');
 require('dotenv').config();
+const rateLimit = require('express-rate-limit');
+
+// Limits each visitor to 5 form submissions per 15 minutes
+const formLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5,
+    message: { success: false, message: 'Too many submissions, please try again later.' }
+});
 
 const app = express();
 app.use(express.json());
 app.use(cors());
-
 // CREATE A CONNECTION POOL (instead of a single connection)
 // A pool automatically reconnects and hands out fresh connections per request,
 // so the server doesn't die if one connection drops or times out.
@@ -35,7 +42,7 @@ app.get('/', (req, res) => {
 });
 
 // RESERVATION ROUTE — validates input, then saves to database
-app.post('/reservation', (req, res) => {
+app.post('/reservation', formLimiter, (req, res) => {
     const { name, phone, date, time, people, requests } = req.body;
 
     if (!name || !phone || !date || !time || !people) {
@@ -56,7 +63,15 @@ app.post('/reservation', (req, res) => {
 });
 
 // GET all reservations (for the future staff dashboard)
-app.get('/reservations', (req, res) => {
+// Simple protection: only allow requests that include the correct staff key
+function checkStaffKey(req, res, next) {
+    const key = req.headers['x-staff-key'];
+    if (key !== process.env.STAFF_KEY) {
+        return res.status(401).json({ success: false, message: 'Unauthorized' });
+    }
+    next();
+}
+app.get('/reservations', checkStaffKey, (req, res) => {
     db.query('SELECT * FROM reservations ORDER BY created_at DESC', (err, results) => {
         if (err) {
             console.error('Error fetching reservations:', err.message);
@@ -67,7 +82,7 @@ app.get('/reservations', (req, res) => {
 });
 
 // REVIEW ROUTE — validates input, then saves to database
-app.post('/review', (req, res) => {
+app.post('/review', formLimiter, (req, res) => {
     const { name, rating, review } = req.body;
 
     if (!name || !rating || !review) {
@@ -90,7 +105,7 @@ app.post('/review', (req, res) => {
 });
 
 // GET all reviews (so reviews.html can eventually display real reviews)
-app.get('/reviews', (req, res) => {
+app.get('/reviews', checkStaffKey, (req, res) => {
     db.query('SELECT * FROM reviews ORDER BY created_at DESC', (err, results) => {
         if (err) {
             console.error('Error fetching reviews:', err.message);
@@ -101,7 +116,7 @@ app.get('/reviews', (req, res) => {
 });
 
 // JOB APPLICATION ROUTE — validates input, then saves to database
-app.post('/apply', (req, res) => {
+app.post('/apply', formLimiter, (req, res) => {
     const { name, email, phone, position, message } = req.body;
 
     if (!name || !email || !phone || !position) {
@@ -126,7 +141,7 @@ app.post('/apply', (req, res) => {
 });
 
 // GET all applications (for the future staff dashboard)
-app.get('/applications', (req, res) => {
+app.get('/applications', checkStaffKey, (req, res) => {
     db.query('SELECT * FROM applications ORDER BY created_at DESC', (err, results) => {
         if (err) {
             console.error('Error fetching applications:', err.message);

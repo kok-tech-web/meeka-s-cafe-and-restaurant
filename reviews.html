@@ -193,7 +193,6 @@
   </footer>
 
   <script>
-    const API_URL = "http://localhost:3000"; // change this one line when you deploy
     const stars = document.querySelectorAll('.star');
     let selected = 0;
 
@@ -229,7 +228,7 @@
         return;
       }
 
-      const response = await fetch(`${API_URL}/review`, {
+      const response = await fetch('http://localhost:3000/review', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, rating: selected, review })
@@ -244,7 +243,7 @@
         stars.forEach(s => s.classList.remove('active'));
         selected = 0;
       } else {
-        alert('Something went wrong. Please try again.');
+        alert(result.message);
       }
     });
   </script>
