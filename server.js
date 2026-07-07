@@ -113,6 +113,22 @@ app.get('/reviews', checkStaffKey, (req, res) => {
         }
         res.json({ success: true, data: results });
     });
+    // DELETE a review by ID (staff only)
+    app.delete('/reviews/:id', checkStaffKey, (req, res) => {
+        const { id } = req.params;
+
+        db.query('DELETE FROM reviews WHERE id = ?', [id], (err, result) => {
+            if (err) {
+                console.error('Error deleting review:', err.message);
+                return res.status(500).json({ success: false, message: 'Failed to delete review' });
+            }
+            if (result.affectedRows === 0) {
+                return res.status(404).json({ success: false, message: 'Review not found' });
+            }
+            console.log('Review deleted, ID:', id);
+            res.json({ success: true, message: 'Review deleted successfully' });
+        });
+    });
 });
 
 // JOB APPLICATION ROUTE — validates input, then saves to database
@@ -250,9 +266,9 @@ app.post('/tasks', (req, res) => {
     if (!title || !assigned_to) return res.status(400).json({ success: false, message: 'Please fill in all fields.' });
     db.query('INSERT INTO tasks (title, assigned_to, due_date) VALUES (?, ?, ?)',
         [title, assigned_to, due_date || null], (err) => {
-        if (err) return res.status(500).json({ success: false, message: 'Failed to assign task.' });
-        res.json({ success: true, message: 'Task assigned!' });
-    });
+            if (err) return res.status(500).json({ success: false, message: 'Failed to assign task.' });
+            res.json({ success: true, message: 'Task assigned!' });
+        });
 });
 
 app.put('/tasks/:id', (req, res) => {

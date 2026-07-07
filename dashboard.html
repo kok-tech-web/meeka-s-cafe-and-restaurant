@@ -225,6 +225,11 @@
                 th.textContent = col;
                 headRow.appendChild(th);
             });
+            if (type === 'reviews') {
+                const th = document.createElement('th');
+                th.textContent = 'Action';
+                headRow.appendChild(th);
+            }
             head.appendChild(headRow);
 
             // Build one row per record
@@ -235,11 +240,44 @@
                     td.textContent = record[col] ?? '';
                     row.appendChild(td);
                 });
+
+                if (type === 'reviews') {
+                    const td = document.createElement('td');
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.textContent = 'Delete';
+                    deleteBtn.style.background = '#c0392b';
+                    deleteBtn.style.color = '#fff';
+                    deleteBtn.style.border = 'none';
+                    deleteBtn.style.padding = '6px 12px';
+                    deleteBtn.style.borderRadius = '4px';
+                    deleteBtn.style.cursor = 'pointer';
+                    deleteBtn.onclick = () => deleteReview(record.id);
+                    td.appendChild(deleteBtn);
+                    row.appendChild(td);
+                }
+
                 body.appendChild(row);
             });
 
             table.style.display = 'table';
             emptyMsg.style.display = 'none';
+        }
+
+        function deleteReview(id) {
+            if (!confirm('Delete this review? This cannot be undone.')) return;
+
+            fetch(`${API_URL}/reviews/${id}`, {
+                method: 'DELETE',
+                headers: { 'x-staff-key': staffKey }
+            })
+                .then(res => res.json())
+                .then(result => {
+                    if (result.success) {
+                        loadTab('reviews');
+                    } else {
+                        alert(result.message);
+                    }
+                });
         }
     </script>
 
