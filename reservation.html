@@ -39,7 +39,7 @@
   </div>
 
   <!-- RESERVATION FORM -->
-  <section class="section" style="max-width: 620px; margin: 0 auto;">
+  <section class="section fade-in-section" style="max-width: 620px; margin: 0 auto;">
     <div class="form-card">
 
       <div class="form-group">
@@ -152,6 +152,19 @@
         alert(result.message);
       }
     });
+  </script>
+  <script>
+    const revealElements = document.querySelectorAll('.fade-in-section');
+
+    const revealOnScroll = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach(el => revealOnScroll.observe(el));
   </script>
 
 </body>
