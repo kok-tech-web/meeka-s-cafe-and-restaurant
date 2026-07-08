@@ -391,6 +391,7 @@ body {
 .footer-right i {
   color: #E87722;
 }
+
 /* PAGE HEADER */
 .page-header {
   background: #1a1a1a;
@@ -398,6 +399,7 @@ body {
   text-align: center;
   border-bottom: 1px solid #2a2a2a;
 }
+
 /* FORMS */
 .form-card {
   background: #fff;
@@ -480,6 +482,7 @@ body {
   font-size: 12px;
   color: #888;
 }
+
 /* REVIEWS */
 .rating-summary {
   display: flex;
@@ -623,6 +626,7 @@ body {
   color: #555;
   line-height: 1.7;
 }
+
 /* TOUR */
 .video-placeholder {
   background: #1a1a1a;
@@ -741,6 +745,7 @@ body {
   color: #888;
   line-height: 1.6;
 }
+
 /* JOBS */
 .job-card {
   background: #fff;
@@ -868,4 +873,44 @@ body {
   font-size: 12px;
   color: #aaa;
   text-align: center;
+}
+
+/* ===== MOTION & INTERACTIVITY ===== */
+
+/* Smooth transitions for anything that changes on hover */
+.menu-card,
+.btn-primary,
+.btn-secondary,
+.btn-reserve {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Menu cards lift slightly and get a soft shadow on hover */
+.menu-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Buttons grow subtly on hover */
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-reserve:hover {
+  transform: translateY(-2px);
+}
+
+/* Smooth scrolling when clicking nav links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Sections start slightly faded/lowered, then animate into place */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
 }

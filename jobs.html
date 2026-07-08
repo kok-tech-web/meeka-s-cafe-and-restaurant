@@ -39,7 +39,7 @@
   </div>
 
   <!-- OPEN POSITIONS -->
-  <section class="section" style="max-width: 800px; margin: 0 auto;">
+  <section class="section fade-in-section" style="max-width: 800px; margin: 0 auto;">
     <div class="section-header">
       <div class="section-tag"></div>
       <h2 class="section-title">Open positions</h2>
@@ -79,7 +79,7 @@
   <div class="divider"></div>
 
   <!-- APPLICATION FORM -->
-  <section class="section" style="max-width: 800px; margin: 0 auto;">
+  <section class="section fade-in-section" style="max-width: 800px; margin: 0 auto;">
     <div class="section-header">
       <div class="section-tag"></div>
       <h2 class="section-title">Apply now</h2>
@@ -160,6 +160,19 @@
         alert(result.message);
       }
     });
+  </script>
+  <script>
+    const revealElements = document.querySelectorAll('.fade-in-section');
+
+    const revealOnScroll = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach(el => revealOnScroll.observe(el));
   </script>
 
 </body>

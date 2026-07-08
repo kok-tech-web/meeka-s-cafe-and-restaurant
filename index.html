@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MEEKA's Café and Restaurant</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
 </head>
+
 <body>
 
   <!-- NAVBAR -->
@@ -45,7 +47,7 @@
   </section>
 
   <!-- POPULAR DISHES -->
-  <section class="section">
+  <section class="section fade-in-section">
     <div class="section-header">
       <div class="section-tag"></div>
       <h2 class="section-title">Popular dishes</h2>
@@ -101,7 +103,7 @@
   <div class="divider"></div>
 
   <!-- SIGNATURE COMBO -->
-  <section class="section">
+  <section class="section fade-in-section">
     <div class="section-header">
       <div class="section-tag"></div>
       <h2 class="section-title">Meeka's signature combos</h2>
@@ -110,7 +112,8 @@
       <div class="special-icon"><i class="ti ti-star"></i></div>
       <div>
         <div class="special-title">Our own creation — the Meeka's combo</div>
-        <div class="special-desc">A carefully crafted platter of our best dishes, made from a recipe unique to us. Not found anywhere else — this is what Meeka's is known for.</div>
+        <div class="special-desc">A carefully crafted platter of our best dishes, made from a recipe unique to us. Not
+          found anywhere else — this is what Meeka's is known for.</div>
         <a href="menu.html" class="btn-primary">See the full combo menu</a>
       </div>
     </div>
@@ -157,6 +160,20 @@
       <span><i class="ti ti-clock"></i> 7am – 10pm</span>
     </div>
   </footer>
+  <script>
+    const revealElements = document.querySelectorAll('.fade-in-section');
+
+    const revealOnScroll = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach(el => revealOnScroll.observe(el));
+  </script>
 
 </body>
+
 </html>

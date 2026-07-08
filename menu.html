@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Menu — MEEKA's Café and Restaurant</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
 </head>
+
 <body>
 
   <!-- NAVBAR -->
@@ -37,7 +39,7 @@
   </div>
 
   <!-- STARTERS -->
-  <section class="section">
+  <section class="section fade-in-section">
     <div class="section-header">
       <div class="section-tag"></div>
       <h2 class="section-title">Starters</h2>
@@ -73,7 +75,7 @@
   <div class="divider"></div>
 
   <!-- MAIN COURSE -->
-  <section class="section">
+  <section class="section fade-in-section">
     <div class="section-header">
       <div class="section-tag"></div>
       <h2 class="section-title">Main course</h2>
@@ -84,7 +86,8 @@
         <div class="menu-body">
           <div class="menu-name">Tibs special</div>
           <div class="menu-desc">Sautéed beef with rosemary and jalapeño</div>
-          <div class="menu-footer"><span class="menu-price">220 ETB</span><span class="menu-badge">Bestseller</span></div>
+          <div class="menu-footer"><span class="menu-price">220 ETB</span><span class="menu-badge">Bestseller</span>
+          </div>
         </div>
       </div>
       <div class="menu-card">
@@ -92,7 +95,8 @@
         <div class="menu-body">
           <div class="menu-name">Special firfir</div>
           <div class="menu-desc">Injera, spiced lamb, awaze sauce</div>
-          <div class="menu-footer"><span class="menu-price">150 ETB</span><span class="menu-badge">Bestseller</span></div>
+          <div class="menu-footer"><span class="menu-price">150 ETB</span><span class="menu-badge">Bestseller</span>
+          </div>
         </div>
       </div>
       <div class="menu-card">
@@ -117,7 +121,7 @@
   <div class="divider"></div>
 
   <!-- SIGNATURE COMBOS -->
-  <section class="section">
+  <section class="section fade-in-section">
     <div class="section-header">
       <div class="section-tag"></div>
       <h2 class="section-title">Meeka's signature combos</h2>
@@ -128,7 +132,8 @@
         <div class="menu-body">
           <div class="menu-name">Meeka's combo</div>
           <div class="menu-desc">Our signature mixed platter — unique to us</div>
-          <div class="menu-footer"><span class="menu-price">280 ETB</span><span class="menu-badge">Signature</span></div>
+          <div class="menu-footer"><span class="menu-price">280 ETB</span><span class="menu-badge">Signature</span>
+          </div>
         </div>
       </div>
       <div class="menu-card">
@@ -136,7 +141,8 @@
         <div class="menu-body">
           <div class="menu-name">Spicy combo</div>
           <div class="menu-desc">For heat lovers — our boldest flavors together</div>
-          <div class="menu-footer"><span class="menu-price">260 ETB</span><span class="menu-badge">Signature</span></div>
+          <div class="menu-footer"><span class="menu-price">260 ETB</span><span class="menu-badge">Signature</span>
+          </div>
         </div>
       </div>
       <div class="menu-card">
@@ -144,7 +150,8 @@
         <div class="menu-body">
           <div class="menu-name">Family combo</div>
           <div class="menu-desc">Large sharing platter for 3–4 people</div>
-          <div class="menu-footer"><span class="menu-price">520 ETB</span><span class="menu-badge">Signature</span></div>
+          <div class="menu-footer"><span class="menu-price">520 ETB</span><span class="menu-badge">Signature</span>
+          </div>
         </div>
       </div>
     </div>
@@ -153,7 +160,7 @@
   <div class="divider"></div>
 
   <!-- CAFÉ -->
-  <section class="section">
+  <section class="section fade-in-section">
     <div class="section-header">
       <div class="section-tag"></div>
       <h2 class="section-title">Café and drinks</h2>
@@ -195,6 +202,20 @@
       <span><i class="ti ti-clock"></i> 7am – 10pm</span>
     </div>
   </footer>
+  <script>
+    const revealElements = document.querySelectorAll('.fade-in-section');
+
+    const revealOnScroll = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach(el => revealOnScroll.observe(el));
+  </script>
 
 </body>
+
 </html>
